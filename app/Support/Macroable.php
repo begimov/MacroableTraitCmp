@@ -17,9 +17,9 @@ trait Macroable
     public function __call($method, $args)
     {
         $macro = static::$macros[$method];
-        
+
         if ($macro instanceof \Closure) {
-            call_user_func_array($macro, $args);
+            call_user_func_array($macro->bindTo($this, static::class), $args);
         }
     }
 }
