@@ -9,12 +9,15 @@ trait Macroable
 {
     protected static $macros = [];
 
-    public function mixin($mixin)
+    public static function mixin($mixin)
     {
         $methods = (new \ReflectionClass($mixin))->getMethods(
             \ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PROTECTED
         );
-        dump($methods);
+        
+        foreach ($methods as $method) {
+            $method->setAccessible(true);
+        }
     }
 
     public static function macro($name, $macro)
