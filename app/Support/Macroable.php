@@ -11,7 +11,9 @@ trait Macroable
 
     public function mixin($mixin)
     {
-        $methods = (new \ReflectionClass($mixin))->getMethods();
+        $methods = (new \ReflectionClass($mixin))->getMethods(
+            \ReflectionMethod::IS_PUBLIC | \ReflectionMethod::IS_PROTECTED
+        );
         dump($methods);
     }
 
